@@ -1,0 +1,521 @@
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+.box {
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    border: 5px solid #ff4081;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.05);
+}
+
+.box::before {
+    content: "点我点我";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: #ff4081;
+    font-weight: bold;
+}
+
+.box img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+}
+
+/* 背景装饰元素 */
+.background-decorations {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* 漂浮的气泡 */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.4),
+        rgba(255, 255, 255, 0.1)
+    );
+    animation: float-bubble 15s linear infinite;
+    box-shadow: 
+        inset 0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.bubble:nth-child(1) { left: 10%; width: 40px; height: 40px; animation-delay: 0s; }
+.bubble:nth-child(2) { left: 30%; width: 60px; height: 60px; animation-delay: 2s; }
+.bubble:nth-child(3) { left: 50%; width: 30px; height: 30px; animation-delay: 4s; }
+.bubble:nth-child(4) { left: 70%; width: 50px; height: 50px; animation-delay: 6s; }
+.bubble:nth-child(5) { left: 90%; width: 45px; height: 45px; animation-delay: 8s; }
+
+/* 漂浮的爱心 */
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 182, 193, 0.6);
+    transform: rotate(45deg);
+    animation: float-heart 12s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 182, 193, 0.6);
+}
+
+.heart::before {
+    left: -10px;
+}
+
+.heart::after {
+    top: -10px;
+}
+
+.heart:nth-child(1) { right: 10%; animation-delay: 0s; }
+.heart:nth-child(2) { right: 30%; animation-delay: 3s; }
+.heart:nth-child(3) { right: 50%; animation-delay: 6s; }
+.heart:nth-child(4) { right: 70%; animation-delay: 9s; }
+
+/* 星星背景 */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.stars::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: twinkle 4s infinite;
+    opacity: 0.5;
+}
+
+/* 盲盒容器样式 */
+.blind-box-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 192, 203, 0.9) 0%, 
+            rgba(255, 105, 180, 0.8) 50%,
+            rgba(255, 20, 147, 0.7) 100%
+        );
+    perspective: 1200px;
+    position: relative;
+    z-index: 1;
+}
+
+.blind-box-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 50% 50%, 
+            rgba(255, 255, 255, 0.2) 0%, 
+            transparent 60%
+        ),
+        repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.1) 0px,
+            rgba(255, 255, 255, 0.1) 2px,
+            transparent 2px,
+            transparent 8px
+        );
+    z-index: -1;
+}
+
+/* 盲盒样式 */
+.blind-box {
+    width: 280px;
+    height: 280px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.blind-box:hover {
+    transform: scale(1.05) rotate3d(1, 1, 0, 15deg);
+}
+
+/* 礼物包装样式 */
+.gift-wrap {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    border-radius: 30px;
+    box-shadow: 
+        0 0 30px rgba(255, 105, 180, 0.5),
+        inset 0 0 30px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.gift-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+}
+
+/* 彩带样式 */
+.ribbon-vertical,
+.ribbon-horizontal {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.ribbon-vertical {
+    width: 40px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.9) 50%,
+        rgba(255, 255, 255, 0.5)
+    );
+}
+
+.ribbon-horizontal {
+    width: 100%;
+    height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.9) 50%,
+        rgba(255, 255, 255, 0.5)
+    );
+}
+
+/* 蝴蝶结样式 */
+.bow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.bow-left,
+.bow-right {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 1)
+    );
+    position: absolute;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.bow-left {
+    transform: rotate(45deg) translateX(-25px);
+}
+
+.bow-right {
+    transform: rotate(-45deg) translateX(25px);
+}
+
+.bow-center {
+    width: 25px;
+    height: 25px;
+    background: white;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.7),
+        inset 0 0 10px rgba(255, 192, 203, 0.5);
+}
+
+/* 闪烁效果 */
+.sparkles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 28px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    animation: float 3s ease-in-out infinite;
+}
+
+.s1 { top: 15%; left: 15%; animation-delay: 0s; }
+.s2 { top: 15%; right: 15%; animation-delay: 0.8s; }
+.s3 { bottom: 15%; left: 15%; animation-delay: 1.6s; }
+.s4 { bottom: 15%; right: 15%; animation-delay: 2.4s; }
+
+/* 点我点我文字样式 */
+.click-me {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
+    text-shadow: 
+        2px 2px 0 #ff1493,
+        -2px -2px 0 #ff1493,
+        2px -2px 0 #ff1493,
+        -2px 2px 0 #ff1493;
+    z-index: 3;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    white-space: nowrap;
+    letter-spacing: 2px;
+}
+
+/* 动画定义 */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-25px) rotate(180deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes float-bubble {
+    0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(50vh) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes float-heart {
+    0% {
+        transform: translateY(100vh) rotate(45deg) scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(50vh) rotate(90deg) scale(1.2);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(135deg) scale(1);
+        opacity: 0;
+    }
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .blind-box {
+        width: 220px;
+        height: 220px;
+    }
+
+    .click-me {
+        font-size: 28px;
+    }
+
+    .ribbon-vertical {
+        width: 30px;
+    }
+
+    .ribbon-horizontal {
+        height: 30px;
+    }
+
+    .bow-left,
+    .bow-right {
+        width: 40px;
+        height: 40px;
+    }
+
+    .bow-center {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sparkle {
+        font-size: 24px;
+    }
+
+    .bubble:nth-child(1) { width: 30px; height: 30px; }
+    .bubble:nth-child(2) { width: 45px; height: 45px; }
+    .bubble:nth-child(3) { width: 25px; height: 25px; }
+    .bubble:nth-child(4) { width: 35px; height: 35px; }
+    .bubble:nth-child(5) { width: 30px; height: 30px; }
+
+    .heart {
+        width: 15px;
+        height: 15px;
+    }
+
+    .heart::before,
+    .heart::after {
+        width: 15px;
+        height: 15px;
+    }
+
+    .heart::before {
+        left: -7.5px;
+    }
+
+    .heart::after {
+        top: -7.5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .blind-box {
+        width: 180px;
+        height: 180px;
+    }
+
+    .click-me {
+        font-size: 24px;
+    }
+
+    .ribbon-vertical {
+        width: 25px;
+    }
+
+    .ribbon-horizontal {
+        height: 25px;
+    }
+
+    .bow-left,
+    .bow-right {
+        width: 35px;
+        height: 35px;
+    }
+
+    .bow-center {
+        width: 18px;
+        height: 18px;
+    }
+
+    .sparkle {
+        font-size: 20px;
+    }
+}
+
+/* 确保在不同设备上背景元素都能正确显示 */
+@media screen and (orientation: portrait) {
+    .background-decorations {
+        transform: rotate(90deg);
+    }
+}
+
+/* 优化移动端动画性能 */
+@media (prefers-reduced-motion: reduce) {
+    .blind-box,
+    .sparkle,
+    .bubble,
+    .heart,
+    .click-me {
+        animation-duration: 3s;
+    }
+}
+
+/* 适配不同屏幕高度 */
+@media screen and (max-height: 600px) {
+    .blind-box {
+        transform: scale(0.8);
+    }
+
+    .background-decorations {
+        transform: scale(0.8);
+    }
+}
