@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>🎉 Happy Birthday</title>
+    <meta name="description" content="一份特别的生日祝福">
+    <meta property="og:title" content="🎉 Happy Birthday">
+    <meta property="og:description" content="一份特别的生日祝福">
+    <meta property="og:image" content="assets/og-image.gif">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/interactive.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.5/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.5/dist/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+</head>
+<body>
+    <div id="stage">
+        <div class="typed-container">
+            <div class="typed-text"></div>
+        </div>
+        <div class="cake-container">
+            <div class="cake">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+        <canvas id="fireworks"></canvas>
+        <div class="balloons-container"></div>
+    </div>
+    <audio id="bgm" src="assets/2025/06/bgm.ogg" loop></audio>
+    <script defer src="js/interactive.js"></script>
+</body>
+</html> 
