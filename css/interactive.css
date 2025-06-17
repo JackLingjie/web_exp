@@ -1,498 +1,272 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #f0f8ff;
     font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
+    color: #fff;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.content {
     text-align: center;
-    padding: 50px;
-}
-
-h1 {
-    color: #ff69b4;
-    font-size: 2.5em;
-}
-
-button {
-    background-color: #ff1493;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #ff69b4;
-}
-
-.scroll-text {
-    font-size: 1.5em;
-    color: #4682b4;
-    margin-top: 20px;
-    animation: scroll 10s linear infinite;
-}
-
-@keyframes scroll {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); }
-}
-
-/* 背景装饰 */
-.background-decorations {
-    position: fixed;
-    top: 0;
-    left: 0;
+    z-index: 2;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-/* 漂浮的气泡 */
-.floating-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.3),
-        rgba(255, 255, 255, 0.1)
-    );
-    animation: float-circle 20s linear infinite;
-    box-shadow: 
-        inset 0 0 15px rgba(255, 255, 255, 0.2),
-        0 0 25px rgba(255, 255, 255, 0.1);
-}
-
-.floating-circle:nth-child(1) { left: 5%; width: 100px; height: 100px; animation-delay: 0s; }
-.floating-circle:nth-child(2) { left: 25%; width: 150px; height: 150px; animation-delay: 4s; }
-.floating-circle:nth-child(3) { left: 45%; width: 80px; height: 80px; animation-delay: 8s; }
-.floating-circle:nth-child(4) { left: 65%; width: 120px; height: 120px; animation-delay: 12s; }
-.floating-circle:nth-child(5) { left: 85%; width: 90px; height: 90px; animation-delay: 16s; }
-
-/* 漂浮的装饰 */
-.floating-decor {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    opacity: 0.6;
-    animation: float-decor 15s linear infinite;
-}
-
-.floating-decor::before {
-    content: '✨';
-    font-size: 24px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.floating-decor:nth-child(6) { right: 10%; animation-delay: 0s; }
-.floating-decor:nth-child(7) { right: 30%; animation-delay: 3s; }
-.floating-decor:nth-child(8) { right: 50%; animation-delay: 6s; }
-.floating-decor:nth-child(9) { right: 70%; animation-delay: 9s; }
-
-.interactive-container {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: 
-        linear-gradient(135deg, 
-            rgba(255, 182, 193, 0.9) 0%, 
-            rgba(255, 105, 180, 0.8) 50%,
-            rgba(255, 20, 147, 0.7) 100%
-        );
-    gap: 40px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
 }
 
-.interactive-container::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: 
-        radial-gradient(circle at 50% 50%, 
-            rgba(255, 255, 255, 0.2) 0%, 
-            transparent 60%
-        ),
-        repeating-linear-gradient(45deg,
-            rgba(255, 255, 255, 0.1) 0px,
-            rgba(255, 255, 255, 0.1) 2px,
-            transparent 2px,
-            transparent 10px
-        );
-    animation: backgroundMove 20s linear infinite;
-    z-index: 1;
-}
-
-.fancy-button {
-    position: relative;
-    padding: 20px 40px;
-    font-size: 28px;
-    background: linear-gradient(45deg, #ff69b4, #ff1493);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 
-        0 10px 20px rgba(255, 105, 180, 0.3),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.1),
-        0 0 0 4px rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-    z-index: 2;
-    font-weight: bold;
-    letter-spacing: 1px;
-    overflow: hidden;
-}
-
-.fancy-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-}
-
-.fancy-button:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 
-        0 15px 30px rgba(255, 105, 180, 0.4),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.2),
-        0 0 0 4px rgba(255, 255, 255, 0.3);
-}
-
-.fancy-button:hover::before {
-    transform: translateX(100%);
-}
-
-.fancy-button:active {
-    transform: translateY(2px) scale(0.98);
-    box-shadow: 
-        0 5px 15px rgba(255, 105, 180, 0.2),
-        inset 0 2px 0 rgba(0, 0, 0, 0.1),
-        0 0 0 4px rgba(255, 255, 255, 0.2);
-}
-
-.message-container {
-    position: relative;
-    font-size: 24px;
-    color: #fff;
-    text-align: center;
-    min-height: 60px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    box-shadow: 
-        0 8px 32px rgba(255, 105, 180, 0.2),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-    max-width: 80%;
-}
-
-.message-container.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.rolling-text {
-    display: inline-block;
-    animation: rollIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes rollIn {
-    0% {
-        transform: translateY(100%) rotate(-10deg);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0) rotate(0);
-        opacity: 1;
-    }
-}
-
-@keyframes backgroundMove {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-/* 添加emoji动画 */
-.emoji {
-    display: inline-block;
-    animation: bounce 1s ease infinite;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-/* 新增动画 */
-@keyframes float-circle {
-    0% {
-        transform: translateY(100vh) scale(1) rotate(0deg);
-        opacity: 0;
-    }
-    50% {
-        transform: translateY(50vh) scale(1.2) rotate(180deg);
-        opacity: 0.5;
-    }
-    100% {
-        transform: translateY(-100px) scale(1) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-@keyframes float-decor {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    50% {
-        transform: translateY(50vh) rotate(180deg);
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-#stage {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--c-bg-1), var(--c-bg-2));
-}
-
-#stage::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Typed.js 容器 */
 .typed-container {
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .typed-text {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    color: var(--c-accent);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* 蛋糕样式 */
-.cake-container {
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 200px;
-    opacity: 0;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.cake-container:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-
 .cake {
     position: relative;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-    border-radius: 50%;
-    box-shadow: 
-        0 10px 20px rgba(0, 0, 0, 0.1),
-        inset 0 -10px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(50px);
 }
 
-.cake::before {
-    content: '';
+.cake.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.plate {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.2) 50%, transparent 55%);
-    animation: shine 3s infinite;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.layer-bottom {
+    width: 200px;
+    height: 60px;
+    bottom: 20px;
+}
+
+.layer-middle {
+    width: 160px;
+    height: 50px;
+    bottom: 80px;
+}
+
+.layer-top {
+    width: 120px;
+    height: 40px;
+    bottom: 130px;
+}
+
+.icing {
+    position: absolute;
+    width: 120px;
+    height: 20px;
+    bottom: 170px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border-radius: 10px;
 }
 
 .candle {
     position: absolute;
-    top: -20px;
+    width: 10px;
+    height: 40px;
+    background: #fff;
     left: 50%;
     transform: translateX(-50%);
-    width: 8px;
-    height: 30px;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    bottom: 190px;
+    border-radius: 5px;
 }
 
 .flame {
     position: absolute;
-    top: -15px;
+    width: 20px;
+    height: 30px;
+    background: linear-gradient(to top, #ffd700, #ff6b6b);
     left: 50%;
     transform: translateX(-50%);
-    width: 12px;
-    height: 20px;
-    background: #ffd700;
+    bottom: 40px;
     border-radius: 50% 50% 20% 20%;
-    box-shadow: 0 0 20px #ffd700;
-    animation: flicker 1s infinite alternate;
+    filter: blur(2px);
+    opacity: 0;
 }
 
 /* 烟花画布 */
-#fireworks {
+#fireworksCanvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 5;
+    z-index: 0;
 }
 
-/* 气球容器 */
-.balloons-container {
+/* 气球样式 */
+#balloonsContainer {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 4;
+    z-index: 0;
 }
 
 .balloon {
     position: absolute;
     width: 40px;
     height: 50px;
-    background: var(--c-accent);
     border-radius: 50%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    animation: float 4s ease-in-out infinite;
-}
-
-.balloon::before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 20px;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-/* 动画关键帧 */
-@keyframes flicker {
-    0%, 100% {
-        transform: translateX(-50%) scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(-50%) scale(0.8);
-        opacity: 0.8;
-    }
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: float 10s linear infinite;
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotate(0);
-    }
-    50% {
-        transform: translateY(-20px) rotate(5deg);
-    }
-}
-
-@keyframes shine {
     0% {
-        transform: translateX(-100%) rotate(45deg);
+        transform: translateY(100vh) translateX(0);
     }
     100% {
-        transform: translateX(100%) rotate(45deg);
+        transform: translateY(-100vh) translateX(100px);
     }
 }
 
-/* 移动端适配 */
-@media (max-width: 414px) {
+/* 音频控制按钮 */
+.audio-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 100;
+    transition: background-color 0.3s;
+}
+
+.audio-control:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 模态框样式 */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.modal.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
     .typed-text {
-        font-size: 1.8rem;
+        font-size: 1.2rem;
     }
-    
-    .cake-container {
+
+    .cake {
         width: 150px;
         height: 150px;
     }
 
-    .typed-container {
-        padding: 1.5rem;
+    .layer-bottom {
+        width: 150px;
+        height: 45px;
+    }
+
+    .layer-middle {
+        width: 120px;
+        height: 37.5px;
+    }
+
+    .layer-top {
+        width: 90px;
+        height: 30px;
+    }
+
+    .candle {
+        width: 8px;
+        height: 30px;
+    }
+
+    .flame {
+        width: 15px;
+        height: 22.5px;
     }
 }
 
-/* 减少动画 */
-@media (prefers-reduced-motion: reduce) {
-    .flame {
-        animation: none;
+/* 动画 */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
     }
-    
-    .balloon {
-        animation: none;
+    50% {
+        box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
     }
+}
 
-    .cake::before {
-        animation: none;
-    }
-
-    .cake-container:hover {
-        transform: translateX(-50%);
-    }
+.cake.active {
+    animation: glow 2s ease-in-out infinite;
 }

@@ -1,6 +1,10 @@
 // 检查是否支持减少动画
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// 音频处理
+let bgMusic = null;
+let isMusicPlaying = false;
+
 // 音频上下文
 let audioContext;
 const bgm = document.getElementById('bgm');
@@ -8,23 +12,26 @@ bgm.volume = 0.4;
 
 // 初始化音频上下文
 function initAudio() {
-    if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioContext.state === 'suspended') {
-        audioContext.resume();
-    }
-    bgm.play().catch(error => {
-        console.log('Audio playback failed:', error);
-        // 显示提示信息
-        Swal.fire({
-            title: '提示',
-            text: '请点击页面任意位置以启用音频',
-            icon: 'info',
-            confirmButtonText: '知道了',
-            confirmButtonColor: '#ff80bf'
-        });
-    });
+    // 暂时禁用音频功能
+    console.log('音频功能已暂时禁用');
+    return;
+}
+
+// 模态框处理
+function showModal(message, duration = 2000) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.textContent = message;
+    document.body.appendChild(modal);
+
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+        modal.classList.remove('show');
+        setTimeout(() => modal.remove(), 300);
+    }, duration);
 }
 
 // 显示模态框链
@@ -81,13 +88,16 @@ function initTyped() {
         showCursor: false,
         onComplete: () => {
             initAudio();
+            showModals();
         }
     });
 }
 
 // 蛋糕动画
 function animateCake() {
-    const cake = document.querySelector('.cake-container');
+    const cake = document.querySelector('.cake');
+    if (!cake) return;
+
     const timeline = anime.timeline({
         easing: 'easeOutElastic(1, .5)'
     });
@@ -111,7 +121,9 @@ function animateCake() {
 
 // 烟花动画
 function initFireworks() {
-    const canvas = document.getElementById('fireworks');
+    const canvas = document.getElementById('fireworksCanvas');
+    if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -178,7 +190,9 @@ function initFireworks() {
 
 // 气球动画
 function createBalloons() {
-    const container = document.querySelector('.balloons-container');
+    const container = document.getElementById('balloonsContainer');
+    if (!container) return;
+
     const colors = ['#ff80bf', '#ff69b4', '#ff1493', '#ff69b4'];
     const count = window.innerWidth <= 414 ? 5 : 10;
 
@@ -190,90 +204,32 @@ function createBalloons() {
         balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
         balloon.style.animationDelay = `${Math.random() * 2}s`;
         container.appendChild(balloon);
-
-        anime({
-            targets: balloon,
-            translateY: -window.innerHeight - 100,
-            duration: 10000 + Math.random() * 5000,
-            easing: 'linear',
-            complete: () => balloon.remove()
-        });
     }
 }
 
-// 彩带效果
+// 初始化五彩纸屑
 function initConfetti() {
     const jsConfetti = new JSConfetti();
-    const cake = document.querySelector('.cake');
-
-    cake.addEventListener('click', () => {
-        jsConfetti.addConfetti({
-            emojis: ['🎂', '🎉', '🎁', '🎈', '✨'],
-            emojiSize: 50,
-            confettiNumber: 100
-        });
-
-        // 添加点击反馈动画
-        anime({
-            targets: cake,
-            scale: [1, 1.1, 1],
-            duration: 500,
-            easing: 'easeInOutQuad'
-        });
+    jsConfetti.addConfetti({
+        emojis: ['🎉', '🎊', '🎂', '🎁', '🎈'],
+        emojiSize: 50,
+        confettiNumber: 100
     });
 }
 
-// 动画时间线
+// 开始动画时间线
 function startTimeline() {
-    if (prefersReducedMotion) {
-        document.querySelector('.typed-text').textContent = '生日快乐！';
-        return;
-    }
-
-    // 初始化动画
+    // 初始化所有动画
     animateCake();
     initFireworks();
     createBalloons();
     initConfetti();
 
-    // 添加结束按钮
-    const button = document.createElement('button');
-    button.textContent = '再次祝她生日快乐！';
-    button.className = 'cta-button';
-    button.style.position = 'fixed';
-    button.style.bottom = '20px';
-    button.style.left = '50%';
-    button.style.transform = 'translateX(-50%)';
-    button.style.zIndex = '100';
-    button.onclick = () => {
-        // 添加过渡动画
-        const transition = document.createElement('div');
-        transition.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--c-bg-1);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 1000;
-        `;
-        document.body.appendChild(transition);
-
-        // 触发过渡动画
-        requestAnimationFrame(() => {
-            transition.style.opacity = '1';
-            setTimeout(() => {
-                location.href = 'index.html';
-            }, 500);
-        });
-    };
-    document.body.appendChild(button);
+    // 显示模态框
+    showModal('生日快乐！🎉', 3000);
 }
 
-// 页面加载完成后开始
+// 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
-    showModals();
     initTyped();
 });
