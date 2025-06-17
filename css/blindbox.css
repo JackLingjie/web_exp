@@ -397,6 +397,93 @@ body {
     }
 }
 
+/* 开箱动画相关样式 */
+.blind-box.unwrapped .ribbon-vertical,
+.blind-box.unwrapped .ribbon-horizontal,
+.blind-box.unwrapped .bow {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+.blind-box.unwrapped .gift-wrap {
+    animation: unwrap 1.5s ease forwards;
+}
+
+.blind-box.unwrapped .click-me {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+/* 旅程链接样式 */
+.journey-link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 28px;
+    text-decoration: none;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    border-radius: 25px;
+    box-shadow: 
+        0 5px 15px rgba(255, 105, 180, 0.3),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: all 0.5s ease;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.journey-link.show {
+    opacity: 1;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.journey-link:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 
+        0 8px 20px rgba(255, 105, 180, 0.4),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* 动画关键帧 */
+@keyframes unwrap {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0) rotate(10deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -30%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
     .blind-box {
@@ -455,6 +542,11 @@ body {
     .heart::after {
         top: -7.5px;
     }
+
+    .journey-link {
+        font-size: 24px;
+        padding: 12px 25px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -488,6 +580,11 @@ body {
 
     .sparkle {
         font-size: 20px;
+    }
+
+    .journey-link {
+        font-size: 20px;
+        padding: 10px 20px;
     }
 }
 

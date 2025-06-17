@@ -1,48 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#ff69b4">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生日快乐！</title>
+    <meta name="description" content="一份特别的生日礼物">
+    <meta property="og:title" content="生日快乐！">
+    <meta property="og:description" content="一份特别的生日礼物">
+    <meta property="og:image" content="assets/og-image.gif">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/blindbox.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=ZCOOL+KuaiLe&family=Mulish:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-decorations">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="heart"></div>
-        <div class="heart"></div>
-        <div class="heart"></div>
-        <div class="heart"></div>
-    </div>
-    <div class="stars"></div>
-    <div class="blind-box-container">
-        <div class="blind-box">
-            <div class="gift-wrap">
-                <div class="ribbon-vertical"></div>
-                <div class="ribbon-horizontal"></div>
-                <div class="bow">
-                    <div class="bow-left"></div>
-                    <div class="bow-right"></div>
-                    <div class="bow-center"></div>
-                </div>
-                <div class="sparkles">
-                    <div class="sparkle s1">✨</div>
-                    <div class="sparkle s2">✨</div>
-                    <div class="sparkle s3">✨</div>
-                    <div class="sparkle s4">✨</div>
-                </div>
-                <div class="click-me">点我点我</div>
-            </div>
+    <div class="container">
+        <div class="hero">
+            <h1 class="typed-text"></h1>
+            <div class="countdown"></div>
+            <a href="blindbox.html" class="cta-button">点我拆礼物 🎁</a>
         </div>
     </div>
-    <script src="js/blindbox.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

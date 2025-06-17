@@ -1,14 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     const blindBox = document.querySelector('.blind-box');
+    const giftWrap = document.querySelector('.gift-wrap');
+    const audio = document.getElementById('unwrapSound');
+    
+    // 创建新的链接元素
+    const journeyLink = document.createElement('a');
+    journeyLink.href = 'pages/interactive.html';
+    journeyLink.className = 'journey-link';
+    journeyLink.textContent = '一段旅程即将开始...';
+    journeyLink.style.display = 'none';
+    document.querySelector('.blind-box-container').appendChild(journeyLink);
     
     blindBox.addEventListener('click', () => {
-        // 添加过渡动画
-        blindBox.style.transition = 'transform 0.5s ease';
-        blindBox.style.transform = 'scale(0.8) rotate(360deg)';
+        // 播放音效
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+        }
         
-        // 延迟后跳转到第二个页面
+        // 添加开箱动画类
+        blindBox.classList.add('unwrapped');
+        
+        // 1.5秒后显示新链接
         setTimeout(() => {
-            window.location.href = 'pages/interactive.html';
-        }, 500);
+            journeyLink.style.display = 'block';
+            journeyLink.classList.add('show');
+        }, 1500);
     });
 });
